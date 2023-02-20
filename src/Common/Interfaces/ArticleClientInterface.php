@@ -38,7 +38,7 @@ interface ArticleClientInterface
     /**
      * @throws MpApiException
      */
-    public function updateProduct(ProductRequest $product): void;
+    public function updateProduct(ProductRequest $product, string $forceToken = ''): void;
 
     /**
      * @throws MpApiException

@@ -63,9 +63,13 @@ final class ArticleClient extends AbstractMpApiClient implements ArticleClientIn
         );
     }
 
-    public function updateProduct(ProductRequest $product): void
+    public function updateProduct(ProductRequest $product, string $forceToken = ''): void
     {
-        $this->sendJson('PUT', sprintf(self::PRODUCT_DETAIL, $product->getId()), $product->getArrayForApi());
+        $url = sprintf(self::PRODUCT_DETAIL, $product->getId());
+        if ($forceToken) {
+            $url .= '?force_token=' . $forceToken;
+        }
+        $this->sendJson('PUT', $url, $product->getArrayForApi());
     }
 
     public function deleteProduct(string $productId): void
